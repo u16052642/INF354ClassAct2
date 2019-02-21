@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HardwareDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="lgbrand">
+    <Key>
+      <PropertyRef Name="brand_id" />
+    </Key>
+    <Property Name="brand_id" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="brand_name" Type="varchar" MaxLength="100" />
+    <Property Name="brand_type" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="lgcustomer">
+    <Key>
+      <PropertyRef Name="cust_code" />
+      <PropertyRef Name="cust_fname" />
+      <PropertyRef Name="cust_lname" />
+    </Key>
+    <Property Name="cust_code" Type="numeric" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="cust_fname" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="cust_lname" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="cust_street" Type="varchar" MaxLength="70" />
+    <Property Name="cust_city" Type="varchar" MaxLength="50" />
+    <Property Name="cust_state" Type="char" MaxLength="2" />
+    <Property Name="cust_zip" Type="char" MaxLength="5" />
+    <Property Name="cust_balance" Type="numeric" Precision="8" Scale="2" />
+  </EntityType>
+  <EntityType Name="lgdepartment">
+    <Key>
+      <PropertyRef Name="dept_num" />
+    </Key>
+    <Property Name="dept_num" Type="numeric" Precision="5" Scale="0" Nullable="false" />
+    <Property Name="dept_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="dept_mail_box" Type="varchar" MaxLength="3" />
+    <Property Name="dept_phone" Type="varchar" MaxLength="9" />
+    <Property Name="emp_num" Type="numeric" Precision="6" Scale="0" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HardwareDB.dbo.lgemployee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="lgemployee">
+    <Key>
+      <PropertyRef Name="emp_num" />
+      <PropertyRef Name="emp_lname" />
+      <PropertyRef Name="emp_email" />
+      <PropertyRef Name="emp_hireDATETIME" />
+      <PropertyRef Name="emp_title" />
+    </Key>
+    <Property Name="emp_num" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+    <Property Name="emp_fname" Type="varchar" MaxLength="20" />
+    <Property Name="emp_lname" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="emp_email" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="emp_phone" Type="varchar" MaxLength="20" />
+    <Property Name="emp_hireDATETIME" Type="datetime" Nullable="false" />
+    <Property Name="emp_title" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="emp_comm" Type="numeric" Precision="2" Scale="2" />
+    <Property Name="dept_num" Type="numeric" Precision="5" Scale="0" />
+  </EntityType>
+  <EntityType Name="lginvoice">
+    <Key>
+      <PropertyRef Name="inv_num" />
+    </Key>
+    <Property Name="inv_num" Type="numeric" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="inv_DATETIME" Type="datetime" />
+    <Property Name="cust_code" Type="numeric" Precision="38" Scale="0" />
+    <Property Name="inv_total" Type="numeric" Precision="11" Scale="2" />
+    <Property Name="emp_num" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="lgline">
+    <Key>
+      <PropertyRef Name="inv_num" />
+      <PropertyRef Name="line_num" />
+    </Key>
+    <Property Name="inv_num" Type="numeric" Precision="38" Scale="0" Nullable="false" />
+    <Property Name="line_num" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="prod_sku" Type="varchar" MaxLength="15" />
+    <Property Name="line_qty" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="line_price" Type="numeric" Precision="8" Scale="2" />
+  </EntityType>
+  <EntityType Name="lgproduct">
+    <Key>
+      <PropertyRef Name="prod_sku" />
+    </Key>
+    <Property Name="prod_sku" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="prod_descript" Type="varchar" MaxLength="255" />
+    <Property Name="prod_type" Type="varchar" MaxLength="255" />
+    <Property Name="prod_base" Type="varchar" MaxLength="255" />
+    <Property Name="prod_category" Type="varchar" MaxLength="255" />
+    <Property Name="prod_price" Type="numeric" Precision="10" Scale="2" />
+    <Property Name="prod_qoh" Type="numeric" Precision="10" Scale="0" />
+    <Property Name="prod_min" Type="numeric" Precision="10" Scale="0" />
+    <Property Name="brand_id" Type="numeric" Precision="4" Scale="0" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HardwareDB.dbo.lgsalary_history' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="lgsalary_history">
+    <Key>
+      <PropertyRef Name="emp_num" />
+    </Key>
+    <Property Name="emp_num" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+    <Property Name="sal_from" Type="datetime" />
+    <Property Name="sal_end" Type="datetime" />
+    <Property Name="sal_amount" Type="numeric" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="lgsupplies">
+    <Key>
+      <PropertyRef Name="prod_sku" />
+      <PropertyRef Name="vend_id" />
+    </Key>
+    <Property Name="prod_sku" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="vend_id" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="lgvendor">
+    <Key>
+      <PropertyRef Name="vend_id" />
+    </Key>
+    <Property Name="vend_id" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+    <Property Name="vend_name" Type="varchar" MaxLength="255" />
+    <Property Name="vend_street" Type="varchar" MaxLength="50" />
+    <Property Name="vend_city" Type="varchar" MaxLength="50" />
+    <Property Name="vend_state" Type="varchar" MaxLength="2" />
+    <Property Name="vend_zip" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <Association Name="FK__lgsupplie__prod___164452B1">
+    <End Role="lgproduct" Type="Self.lgproduct" Multiplicity="1" />
+    <End Role="lgsupplies" Type="Self.lgsupplies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lgproduct">
+        <PropertyRef Name="prod_sku" />
+      </Principal>
+      <Dependent Role="lgsupplies">
+        <PropertyRef Name="prod_sku" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__lgsupplie__vend___173876EA">
+    <End Role="lgvendor" Type="Self.lgvendor" Multiplicity="1" />
+    <End Role="lgsupplies" Type="Self.lgsupplies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lgvendor">
+        <PropertyRef Name="vend_id" />
+      </Principal>
+      <Dependent Role="lgsupplies">
+        <PropertyRef Name="vend_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HardwareDBModelStoreContainer">
+    <EntitySet Name="lgbrand" EntityType="Self.lgbrand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lgcustomer" EntityType="Self.lgcustomer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lgdepartment" EntityType="Self.lgdepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lginvoice" EntityType="Self.lginvoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lgline" EntityType="Self.lgline" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lgproduct" EntityType="Self.lgproduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lgsupplies" EntityType="Self.lgsupplies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lgvendor" EntityType="Self.lgvendor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lgemployee" EntityType="Self.lgemployee" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [lgemployee].[emp_num] AS [emp_num], 
+    [lgemployee].[emp_fname] AS [emp_fname], 
+    [lgemployee].[emp_lname] AS [emp_lname], 
+    [lgemployee].[emp_email] AS [emp_email], 
+    [lgemployee].[emp_phone] AS [emp_phone], 
+    [lgemployee].[emp_hireDATETIME] AS [emp_hireDATETIME], 
+    [lgemployee].[emp_title] AS [emp_title], 
+    [lgemployee].[emp_comm] AS [emp_comm], 
+    [lgemployee].[dept_num] AS [dept_num]
+    FROM [dbo].[lgemployee] AS [lgemployee]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="lgsalary_history" EntityType="Self.lgsalary_history" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [lgsalary_history].[emp_num] AS [emp_num], 
+    [lgsalary_history].[sal_from] AS [sal_from], 
+    [lgsalary_history].[sal_end] AS [sal_end], 
+    [lgsalary_history].[sal_amount] AS [sal_amount]
+    FROM [dbo].[lgsalary_history] AS [lgsalary_history]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__lgsupplie__prod___164452B1" Association="Self.FK__lgsupplie__prod___164452B1">
+      <End Role="lgproduct" EntitySet="lgproduct" />
+      <End Role="lgsupplies" EntitySet="lgsupplies" />
+    </AssociationSet>
+    <AssociationSet Name="FK__lgsupplie__vend___173876EA" Association="Self.FK__lgsupplie__vend___173876EA">
+      <End Role="lgvendor" EntitySet="lgvendor" />
+      <End Role="lgsupplies" EntitySet="lgsupplies" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
